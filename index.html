@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>SİBEL · Sayı 01</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,500;1,400&family=Montserrat:wght@500&display=swap" rel="stylesheet">
+<style>
+/* VOICE: quiet, luxurious, editorial
+   IDEA: a printed fashion magazine lying on a table, turned page by page
+   PICTURE: the magazine itself, as large as the screen allows
+   COLOUR and TYPE: warm graphite table, ivory paper; Bodoni Moda + Montserrat
+   LAYOUT: one centred book, small masthead above, page controls below */
+:root{color-scheme:dark;--bg:#3c3d42;--ink:#efe9df;--muted:#b9b3a8}
+*{box-sizing:border-box;min-width:0}
+html,body{height:100%}
+body{margin:0;background:radial-gradient(ellipse at 50% 45%,#55565c 0%,#3a3b40 55%,#2c2d31 100%);color:var(--ink);
+  font:15px/1.5 Montserrat,system-ui,sans-serif;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
+  -webkit-user-select:none;user-select:none}
+header{font-family:"Bodoni Moda",serif;letter-spacing:.18em;font-size:15px;color:var(--muted);text-transform:uppercase}
+.stage{position:relative;perspective:2400px;--w:min(92vw,calc((100dvh - 140px)/1.4148));width:var(--w);height:calc(var(--w)*1.4148);touch-action:pan-y}
+.stage::after{content:"";position:absolute;inset:2% -1% -3% 1%;background:rgba(0,0,0,.45);filter:blur(22px);z-index:-1;border-radius:4px}
+.leaf{position:absolute;inset:0;transform-origin:0 50%;transform-style:preserve-3d;transition:transform .9s cubic-bezier(.45,.05,.25,1)}
+.leaf.turned{transform:rotateY(-178deg)}
+.leaf.gone{visibility:hidden}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden;background:#f4efe7}
+.face img{width:100%;height:100%;display:block;pointer-events:none}
+.face.front::after{content:"";position:absolute;inset:0 auto 0 0;width:4%;background:linear-gradient(90deg,rgba(0,0,0,.22),transparent);pointer-events:none}
+.back{transform:rotateY(180deg);background:linear-gradient(90deg,#d9d2c6,#efe9df 30%,#e6dfd3)}
+.leaf .shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,0),rgba(0,0,0,.25));opacity:0;transition:opacity .9s;pointer-events:none}
+.leaf.turned .shade{opacity:1}
+.film{position:absolute;left:5.556%;top:13.089%;width:45.83%;height:57.59%;background:#000;cursor:pointer}
+.film2{position:absolute;left:55.556%;top:3.927%;width:38.889%;height:48.887%;background:#000}
+.film2 video{width:100%;height:100%;display:block;object-fit:cover}
+.film2 .sound{bottom:8px;padding:7px 12px;min-height:34px;font-size:11px}
+.film video{width:100%;height:100%;display:block;object-fit:cover}
+.sound{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);border:0;border-radius:999px;padding:9px 16px;min-height:40px;
+  font:600 12px Montserrat,sans-serif;letter-spacing:.08em;background:rgba(255,255,255,.92);color:#14182b;cursor:pointer;white-space:nowrap}
+.play{position:absolute;inset:0;margin:auto;width:64px;height:64px;border-radius:50%;border:1px solid rgba(255,255,255,.8);background:rgba(0,0,0,.35);
+  display:grid;place-items:center;pointer-events:none}
+.play::before{content:"";border-left:18px solid #fff;border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:5px}
+.film.playing .play{display:none}
+nav{display:flex;align-items:center;gap:18px}
+nav button{width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.35);background:transparent;color:var(--ink);font-size:20px;cursor:pointer}
+nav button:disabled{opacity:.3;cursor:default}
+nav button:focus-visible{outline:2px solid #fff;outline-offset:2px}
+#count{font-family:"Bodoni Moda",serif;font-style:italic;font-size:17px;min-width:70px;text-align:center;color:var(--muted)}
+.hint{font-size:12px;color:var(--muted);letter-spacing:.04em;transition:opacity .6s;text-align:center;width:100%;padding:0 20px;text-wrap:balance}
+.read{position:fixed;inset:0;z-index:50;background:#26272b;display:none;flex-direction:column}
+.read.open{display:flex}
+.read .bar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px;background:#1d1e22}
+.read .bar span{font-size:12px;color:var(--muted);letter-spacing:.04em}
+.read .bar div{display:flex;gap:8px}
+.read button{min-width:44px;height:44px;border-radius:22px;border:1px solid rgba(255,255,255,.35);background:transparent;color:var(--ink);font:600 15px Montserrat,sans-serif;padding:0 14px;cursor:pointer}
+.read .scroll{flex:1;overflow:auto;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y;background:#26272b}
+.read img{display:block;margin:0 auto;width:var(--z,100%);max-width:none}
+@media(max-width:440px){.read .bar span{display:none}.read .bar{justify-content:flex-end}}
+nav .zoom{width:auto;padding:0 16px;border-radius:22px;font:600 13px Montserrat,sans-serif;letter-spacing:.04em}
+@media (prefers-reduced-motion:reduce){.leaf,.leaf .shade{transition:none}}
+</style>
+</head>
+<body>
+<header>SİBEL · Dijital Devrim · Sayı 01</header>
+<div class="stage" id="stage" aria-label="Dergi"></div>
+<nav>
+  <button id="prev" aria-label="Önceki sayfa">‹</button>
+  <span id="count">1 / 7</span>
+  <button id="next" aria-label="Sonraki sayfa">›</button>
+  <button id="zoom" class="zoom" aria-label="Sayfayı büyüt ve oku">Büyüt</button>
+</nav>
+<div class="read" id="read" role="dialog" aria-label="Sayfayı oku">
+  <div class="bar"><span>İki parmakla yakınlaştırın</span><div><button id="zout" aria-label="Küçült">−</button><button id="zin" aria-label="Büyüt">+</button><button id="zclose">Kapat</button></div></div>
+  <div class="scroll" id="rscroll"><img id="rimg" alt="Sayfa"></div>
+</div>
+<div class="hint" id="hint">Çevirmek için kaydırın · Okumak için Büyüt’e dokunun</div>
+<script>
+{
+const pages=["t1.jpg","t2.jpg","t3.jpg","t4.jpg","t5.jpg","t6.jpg","t7.jpg"];
+const FILM=5;
+const stage=document.getElementById('stage');
+stage.innerHTML=pages.map((src,i)=>`<div class="leaf" style="z-index:${pages.length-i}">
+  <div class="face front"><img src="${src}" alt="Sayfa ${i+1}">${i===3?'<div class="film2"><video id="vid2" src="dress.mp4" playsinline muted autoplay preload="auto"></video><button class="sound" id="sound2">Sesi aç</button></div>':''}${i===FILM?`<div class="film" id="film"><video id="vid" src="film2.mp4" playsinline preload="metadata"></video><div class="play"></div><button class="sound" id="sound" hidden>Sesi aç</button></div>`:''}<div class="shade"></div></div>
+  <div class="face back"></div></div>`).join('');
+const leaves=[...stage.querySelectorAll('.leaf')];
+const vid=document.getElementById('vid'),film=document.getElementById('film'),sound=document.getElementById('sound');
+const prevB=document.getElementById('prev'),nextB=document.getElementById('next'),count=document.getElementById('count'),hint=document.getElementById('hint');
+let cur=0;
+function startFilm(){
+  vid.currentTime=0;vid.muted=false;
+  vid.play().then(()=>{sound.hidden=true}).catch(()=>{vid.muted=true;sound.hidden=false;vid.play().catch(()=>{})});
+}
+function stopFilm(){vid.pause()}
+function update(){
+  count.textContent=`${cur+1} / ${pages.length}`;
+  prevB.disabled=cur===0;nextB.disabled=cur===pages.length-1;
+  if(cur===FILM)startFilm();else stopFilm();
+  const v2=document.getElementById('vid2');if(v2){if(cur===3){v2.currentTime=0;v2.play().catch(()=>{})}else{v2.pause();v2.muted=true;document.getElementById('sound2').textContent='Sesi aç'}}
+}
+function next(){
+  if(cur>=pages.length-1)return;
+  const l=leaves[cur];l.classList.remove('gone');l.classList.add('turned');
+  setTimeout(()=>{if(l.classList.contains('turned'))l.classList.add('gone')},900);
+  cur++;hint.style.opacity=0;update();
+}
+function prev(){
+  if(cur<=0)return;
+  cur--;const l=leaves[cur];l.classList.remove('gone');
+  requestAnimationFrame(()=>requestAnimationFrame(()=>l.classList.remove('turned')));
+  update();
+}
+vid.addEventListener('play',()=>film.classList.add('playing'));
+vid.addEventListener('pause',()=>film.classList.remove('playing'));
+film.addEventListener('pointerdown',e=>e.stopPropagation());
+film.addEventListener('click',e=>{
+  e.stopPropagation();
+  if(e.target===sound){vid.muted=false;sound.hidden=true;vid.play().catch(()=>{});return}
+  if(vid.paused){vid.muted=false;vid.play().catch(()=>{vid.muted=true;sound.hidden=false;vid.play().catch(()=>{})})}else vid.pause();
+});
+const v2=document.getElementById('vid2'),s2=document.getElementById('sound2'),f2=document.querySelector('.film2');
+f2.addEventListener('pointerdown',e=>e.stopPropagation());
+f2.addEventListener('pointerup',e=>e.stopPropagation());
+f2.addEventListener('click',e=>{e.stopPropagation();
+  if(e.target===s2){if(v2.muted){v2.muted=false;v2.currentTime=0;v2.play().catch(()=>{});s2.textContent='Sesi kapat'}else{v2.muted=true;s2.textContent='Sesi aç'}return}
+  if(v2.paused||v2.ended){v2.currentTime=v2.ended?0:v2.currentTime;v2.play().catch(()=>{})}else v2.pause()});
+prevB.addEventListener('click',prev);nextB.addEventListener('click',next);
+document.addEventListener('keydown',e=>{if(read.classList.contains('open')){if(e.key==='Escape')read.classList.remove('open');return}if(e.key==='ArrowRight')next();if(e.key==='ArrowLeft')prev()});
+let sx=null,sy=null,touches=0,multi=false;
+const zoomedIn=()=>window.visualViewport&&visualViewport.scale>1.05;
+stage.addEventListener('pointerdown',e=>{touches++;if(touches>1){multi=true;sx=null;return}sx=e.clientX;sy=e.clientY});
+const endTouch=()=>{touches=Math.max(0,touches-1);if(touches===0)setTimeout(()=>{multi=false},250)};
+stage.addEventListener('pointercancel',()=>{endTouch();sx=null});
+stage.addEventListener('touchstart',e=>{if(e.touches.length>1){multi=true;sx=null}},{passive:true});
+stage.addEventListener('pointerup',e=>{
+  endTouch();
+  if(sx===null||multi||zoomedIn()){sx=null;return}
+  const dx=e.clientX-sx,dy=e.clientY-sy;sx=null;
+  if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy)){dx<0?next():prev();return}
+  if(Math.abs(dx)<10&&Math.abs(dy)<10){const r=stage.getBoundingClientRect();(e.clientX-r.left)>r.width*0.5?next():prev()}
+});
+const read=document.getElementById('read'),rimg=document.getElementById('rimg');let z=100;
+const setZ=v=>{z=Math.min(350,Math.max(100,v));rimg.style.width=z+'%'};
+document.getElementById('zoom').addEventListener('click',()=>{rimg.src=pages[cur];setZ(100);rs.scrollTop=0;rs.scrollLeft=0;read.classList.add('open');if(cur===FILM)vid.pause()});
+document.getElementById('zin').addEventListener('click',()=>{const c=(rs.scrollLeft+rs.clientWidth/2)/rimg.offsetWidth;setZ(z+50);rs.scrollLeft=c*rimg.offsetWidth-rs.clientWidth/2});
+document.getElementById('zout').addEventListener('click',()=>{const c=(rs.scrollLeft+rs.clientWidth/2)/rimg.offsetWidth;setZ(z-50);rs.scrollLeft=c*rimg.offsetWidth-rs.clientWidth/2});
+document.getElementById('zclose').addEventListener('click',()=>{read.classList.remove('open')});
+rimg.addEventListener('dblclick',()=>setZ(z>100?100:200));
+const rs=document.getElementById('rscroll');let pd=0,pz=100,pmx=0,pmy=0;
+const dist=t=>Math.hypot(t[0].clientX-t[1].clientX,t[0].clientY-t[1].clientY);
+rs.addEventListener('touchstart',e=>{if(e.touches.length===2){pd=dist(e.touches);pz=z;const r=rs.getBoundingClientRect();pmx=(e.touches[0].clientX+e.touches[1].clientX)/2-r.left;pmy=(e.touches[0].clientY+e.touches[1].clientY)/2-r.top}},{passive:true});
+rs.addEventListener('touchmove',e=>{if(e.touches.length===2&&pd){e.preventDefault();const oldW=rimg.offsetWidth,fx=(rs.scrollLeft+pmx)/oldW,fy=(rs.scrollTop+pmy)/rimg.offsetHeight;setZ(pz*dist(e.touches)/pd);rs.scrollLeft=fx*rimg.offsetWidth-pmx;rs.scrollTop=fy*rimg.offsetHeight-pmy}},{passive:false});
+rs.addEventListener('touchend',e=>{if(e.touches.length<2)pd=0},{passive:true});
+pages.forEach(src=>{const i=new Image();i.src=src});
+update();
+}
+</script>
+</body>
+</html>
