@@ -77,7 +77,7 @@ nav .zoom{width:auto;padding:0 16px;border-radius:22px;font:600 13px Montserrat,
 <script>
 {
 const pages=["t1.jpg","t2.jpg","t3.jpg","t4.jpg","t5.jpg","t6.jpg","t7.jpg"];
-const FILM=5;
+const FILM=2;
 const stage=document.getElementById('stage');
 stage.innerHTML=pages.map((src,i)=>`<div class="leaf" style="z-index:${pages.length-i}">
   <div class="face front"><img src="${src}" alt="Sayfa ${i+1}">${i===3?'<div class="film2"><video id="vid2" src="dress.mp4" playsinline muted autoplay preload="auto"></video><button class="sound" id="sound2">Sesi aç</button></div>':''}${i===FILM?`<div class="film" id="film"><video id="vid" src="film2.mp4" playsinline preload="metadata"></video><div class="play"></div><button class="sound" id="sound" hidden>Sesi aç</button></div>`:''}<div class="shade"></div></div>
